@@ -210,16 +210,18 @@ class Checks:
                     for alert in dependencies:
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl
-                            print("comparing purls")
+                            print("")
                             print(alert.getPurl(version=False))
                             print(pending_alert.purl)
-                            if alert.getPurl(version=False) == pending_alert.purl:
-                                print("matching purl")
-                                # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
-                                if alert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
-                                    print("matching ghsa_id")
-                                    alerts.append(pending_alert)
-                                    break
+                            for depalert in alerts:
+                                if depalert.purl == pending_alert.purl:
+                                # if alert.getPurl(version=False) == pending_alert.purl:
+                                    print("matching purl")
+                                    # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
+                                    if depalert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
+                                        print("matching ghsa_id")
+                                        alerts.append(pending_alert)
+                                        break
             except Exception as err:
                 Octokit.warning(f"Unable to get Dependabot alerts :: {err}")
         elif GitHub.repository.isInPullRequest():

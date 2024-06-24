@@ -210,6 +210,8 @@ class Checks:
                     for alert in dependencies:
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl
+                            print(f"pkg:{alert.manager}/{alert.name}".lower())
+                            print(pending_alert.purl)
                             if f"pkg:{alert.manager}/{alert.name}".lower() == pending_alert.purl:
                                 print("matching purl")
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id

@@ -210,8 +210,9 @@ class Checks:
                     for alert in dependencies:
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl
-                            print(alert.manager, pending_alert.ecosystem, alert.name, pending_alert.name)
-                            if alert.manager == pending_alert.ecosystem and alert.name == pending_alert.name:
+                            print(alert.getPurl(version=True))
+                            print(pending_alert.purl)
+                            if alert.getPurl(version=True) == pending_alert.purl:
                                 print("matching purl")
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
                                 if alert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
@@ -238,7 +239,7 @@ class Checks:
                     for alert in dependencies:
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl
-                            if alert.manager == pending_alert.ecosystem and alert.name == pending_alert.name:
+                            if alert.getPurl(version=True) == pending_alert.purl:
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
                                 if alert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
                                     alerts.append(pending_alert)

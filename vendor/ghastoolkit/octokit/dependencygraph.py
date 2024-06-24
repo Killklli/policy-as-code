@@ -226,10 +226,7 @@ class DependencyGraph:
                         url=alert.get("advisory_ghsa_url"),
                     ),
                     manifest=alert.get("manifest"),
-                    name=depdata.get("name"),
-                    ecosystem=depdata.get("ecosystem"),
                 )
-                print(depdata)
                 dep.alerts.append(dep_alert)
 
             dependencies.append(dep)

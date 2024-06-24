@@ -22,13 +22,7 @@ class DependencyAlert(OctoItem):
 
     created_at: Optional[str] = None
     """Created Timestamp"""
-    
-    ecosystem: Optional[str] = None
-    """Ecosystem"""
-    
-    name: Optional[str] = None
-    """Package Name"""
-    
+
     manifest: Optional[str] = None
     """Manifest"""
 

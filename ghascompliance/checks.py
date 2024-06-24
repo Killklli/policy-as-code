@@ -237,7 +237,7 @@ class Checks:
                         print(pending_alert)
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl
-                            if f"pkg:{alert.ecosystem}/{alert.name}".lower() == pending_alert.purl:
+                            if f"pkg:{alert.manager}/{alert.name}".lower() == pending_alert.purl:
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
                                 if alert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
                                     alerts.append(pending_alert)

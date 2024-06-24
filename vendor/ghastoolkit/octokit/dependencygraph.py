@@ -227,7 +227,7 @@ class DependencyGraph:
                     ),
                     manifest=alert.get("manifest"),
                     name=alert.get("name"),
-                    ecosysten=alert.get("ecosystem"),
+                    ecosystem=alert.get("ecosystem"),
                 )
                 dep.alerts.append(dep_alert)
 

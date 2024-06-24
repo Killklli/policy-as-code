@@ -209,7 +209,7 @@ class Checks:
                 for pending_alert in dependabot_alerts:
                     for alert in dependencies:
                         print(pending_alert)
-                        if pending_alert.manifest == alert.manifest:
+                        if pending_alert.manifest == alert.path:
                             # Compare the Purl
                             if f"pkg:{alert.ecosystem}/{alert.name}".lower() == pending_alert.purl:
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
@@ -235,7 +235,7 @@ class Checks:
                 for pending_alert in dependabot_alerts:
                     for alert in dependencies:
                         print(pending_alert)
-                        if pending_alert.manifest == alert.manifest:
+                        if pending_alert.manifest == alert.path:
                             # Compare the Purl
                             if f"pkg:{alert.ecosystem}/{alert.name}".lower() == pending_alert.purl:
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id

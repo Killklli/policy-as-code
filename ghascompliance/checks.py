@@ -202,11 +202,7 @@ class Checks:
             alerts = []
             try:
                 open_alerts = dependabot.getAlerts("open")
-                dismissed_alerts = dependabot.getAlerts("dismissed")
-                dependabot_alerts = []
-                dependabot_alerts.extend(open_alerts)
-                dependabot_alerts.extend(dismissed_alerts)
-                for pending_alert in dependabot_alerts:
+                for pending_alert in open_alerts:
                     for alert in dependencies:
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl
@@ -229,11 +225,7 @@ class Checks:
             alerts = []
             try:
                 open_alerts = dependabot.getAlerts("open")
-                dismissed_alerts = dependabot.getAlerts("dismissed")
-                dependabot_alerts = []
-                dependabot_alerts.extend(open_alerts)
-                dependabot_alerts.extend(dismissed_alerts)
-                for pending_alert in dependabot_alerts:
+                for pending_alert in open_alerts:
                     for alert in dependencies:
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl

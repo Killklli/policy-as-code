@@ -229,6 +229,7 @@ class DependencyGraph:
                     name=depdata.get("name"),
                     ecosystem=depdata.get("ecosystem"),
                 )
+                print(depdata)
                 dep.alerts.append(dep_alert)
 
             dependencies.append(dep)

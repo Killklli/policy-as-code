@@ -200,9 +200,25 @@ class Checks:
             Octokit.info("Dependabot Alerts from Base Ref (alert diff)")
             dependencies = depgraph.getDependenciesInPR(self.base_ref, self.head_ref)
             alerts = []
-            for dep in dependencies:
-                alerts.extend(dep.alerts)
-
+            try:
+                open_alerts = dependabot.getAlerts("open")
+                dismissed_alerts = dependabot.getAlerts("dismissed")
+                dependabot_alerts = []
+                dependabot_alerts.extend(open_alerts)
+                dependabot_alerts.extend(dismissed_alerts)
+                for pending_alert in dependabot_alerts:
+                    for alert in dependencies:
+                        if pending_alert.get("dependency", {}).get("manifest_path", "") == alert["manifest"]:
+                            # now check if the ecosystem, name and version match
+                            package = pending_alert.get("dependency", {}).get("package", {})
+                            if package.get("ecosystem", "") == alert["ecosystem"] and package.get("name", "") == alert["name"]:
+                                # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
+                                for advisory in alert.get("vulnerabilities", []):
+                                    if advisory.get("advisory_ghsa_id", "") == pending_alert.get("security_advisory", {}).get("ghsa_id", ""):
+                                        alerts.append(pending_alert)
+                                        break
+            except Exception as err:
+                Octokit.warning(f"Unable to get Dependabot alerts :: {err}")
         elif GitHub.repository.isInPullRequest():
             Octokit.info("Dependabot Alerts from Pull Request")
             pr_info = GitHub.repository.getPullRequestInfo()

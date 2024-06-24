@@ -208,12 +208,13 @@ class Checks:
                 dependabot_alerts.extend(dismissed_alerts)
                 for pending_alert in dependabot_alerts:
                     for alert in dependencies:
-                        print(pending_alert)
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl
                             if f"pkg:{alert.manager}/{alert.name}".lower() == pending_alert.purl:
+                                print("matching purl")
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
                                 if alert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
+                                    print("matching ghsa_id")
                                     alerts.append(pending_alert)
             except Exception as err:
                 Octokit.warning(f"Unable to get Dependabot alerts :: {err}")
@@ -234,7 +235,6 @@ class Checks:
                 dependabot_alerts.extend(dismissed_alerts)
                 for pending_alert in dependabot_alerts:
                     for alert in dependencies:
-                        print(pending_alert)
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl
                             if f"pkg:{alert.manager}/{alert.name}".lower() == pending_alert.purl:

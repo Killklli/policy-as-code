@@ -210,16 +210,10 @@ class Checks:
                     for alert in dependencies:
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl
-                            print("")
-                            print(alert.getPurl(version=False))
-                            print(pending_alert.purl)
                             if alert.getPurl(version=False) == pending_alert.purl:
-                                print("matching purl")
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
                                 for vuln in alert.alerts:
-                                    print("checking vulns")
                                     if vuln.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
-                                        print("matching ghsa_id")
                                         alerts.append(pending_alert)
                                         break
             except Exception as err:
@@ -245,9 +239,10 @@ class Checks:
                             # Compare the Purl
                             if alert.getPurl(version=False) == pending_alert.purl:
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
-                                if alert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
-                                    alerts.append(pending_alert)
-                                    break
+                                for vuln in alert.alerts:
+                                    if vuln.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
+                                        alerts.append(pending_alert)
+                                        break
             except Exception as err:
                 Octokit.warning(f"Unable to get Dependabot alerts :: {err}")
 
@@ -264,7 +259,7 @@ class Checks:
             dependencies = depgraph.getDependencies()
 
         Octokit.info("Total Dependabot Alerts :: " + str(len(alerts)))
-
+        print(alerts)
         for alert in alerts:
             if alert.get("dismissReason") is not None:
                 Octokit.debug(

@@ -251,7 +251,6 @@ class Checks:
             dependencies = depgraph.getDependencies()
 
         Octokit.info("Total Dependabot Alerts :: " + str(len(alerts)))
-        print(alerts)
         for alert in alerts:
             if alert.get("dismissReason") is not None:
                 Octokit.debug(

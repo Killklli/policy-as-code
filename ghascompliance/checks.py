@@ -210,6 +210,7 @@ class Checks:
                     for alert in dependencies:
                         if pending_alert.manifest == alert.path:
                             # Compare the Purl
+                            print("comparing purls")
                             print(alert.getPurl(version=False))
                             print(pending_alert.purl)
                             if alert.getPurl(version=False) == pending_alert.purl:

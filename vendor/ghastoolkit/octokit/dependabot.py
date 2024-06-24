@@ -97,7 +97,7 @@ class Dependabot:
                         purl=f"pkg:{package.get('ecosystem')}/{package.get('name')}".lower(),
                         name=package.get("name"),
                         ecosystem=package.get("ecosystem"),
-                        manifest=alert.get("manifest_path"),
+                        path=alert.get("manifest_path"),
                     )
                 )
 

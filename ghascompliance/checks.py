@@ -208,9 +208,10 @@ class Checks:
                 dependabot_alerts.extend(dismissed_alerts)
                 for pending_alert in dependabot_alerts:
                     for alert in dependencies:
-                        if pending_alert.manifest == alert.manifest:
+                        print(pending_alert)
+                        if pending_alert.path == alert.manifest:
                             # now check if the ecosystem, name and version match
-                            if pending_alert.ecosystem == alert.ecosystem and pending_alert.name == alert.name:
+                            if pending_alert.manager == alert.ecosystem and pending_alert.name == alert.name:
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
                                 if alert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
                                     alerts.append(pending_alert)
@@ -233,9 +234,9 @@ class Checks:
                 dependabot_alerts.extend(dismissed_alerts)
                 for pending_alert in dependabot_alerts:
                     for alert in dependencies:
-                        if pending_alert.manifest == alert.manifest:
+                        if pending_alert.path == alert.manifest:
                             # now check if the ecosystem, name and version match
-                            if pending_alert.ecosystem == alert.ecosystem and pending_alert.name == alert.name:
+                            if pending_alert.manager == alert.ecosystem and pending_alert.name == alert.name:
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
                                 if alert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
                                     alerts.append(pending_alert)

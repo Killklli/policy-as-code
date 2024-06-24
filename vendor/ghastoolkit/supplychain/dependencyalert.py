@@ -22,6 +22,15 @@ class DependencyAlert(OctoItem):
 
     created_at: Optional[str] = None
     """Created Timestamp"""
+    
+    ecosystem: Optional[str] = None
+    """Ecosystem"""
+    
+    package: Optional[str] = None
+    """Package"""
+    
+    manifest: Optional[str] = None
+    """Manifest"""
 
     def __init_post__(self):
         if not self.created_at:

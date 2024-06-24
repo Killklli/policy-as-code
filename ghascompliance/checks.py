@@ -208,15 +208,12 @@ class Checks:
                 dependabot_alerts.extend(dismissed_alerts)
                 for pending_alert in dependabot_alerts:
                     for alert in dependencies:
-                        if pending_alert.get("dependency", {}).get("manifest_path", "") == alert["manifest"]:
+                        if pending_alert.manifest == alert.manifest:
                             # now check if the ecosystem, name and version match
-                            package = pending_alert.get("dependency", {}).get("package", {})
-                            if package.get("ecosystem", "") == alert["ecosystem"] and package.get("name", "") == alert["name"]:
+                            if pending_alert.ecosystem == alert.ecosystem and pending_alert.name == alert.name:
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
-                                for advisory in alert.get("vulnerabilities", []):
-                                    if advisory.get("advisory_ghsa_id", "") == pending_alert.get("security_advisory", {}).get("ghsa_id", ""):
-                                        alerts.append(pending_alert)
-                                        break
+                                if alert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
+                                    alerts.append(pending_alert)
             except Exception as err:
                 Octokit.warning(f"Unable to get Dependabot alerts :: {err}")
         elif GitHub.repository.isInPullRequest():
@@ -236,15 +233,12 @@ class Checks:
                 dependabot_alerts.extend(dismissed_alerts)
                 for pending_alert in dependabot_alerts:
                     for alert in dependencies:
-                        if pending_alert.get("dependency", {}).get("manifest_path", "") == alert["manifest"]:
+                        if pending_alert.manifest == alert.manifest:
                             # now check if the ecosystem, name and version match
-                            package = pending_alert.get("dependency", {}).get("package", {})
-                            if package.get("ecosystem", "") == alert["ecosystem"] and package.get("name", "") == alert["name"]:
+                            if pending_alert.ecosystem == alert.ecosystem and pending_alert.name == alert.name:
                                 # check if the security_advisory ghsa_id matches the alert vulnerabilitity advisory_ghsa_id
-                                for advisory in alert.get("vulnerabilities", []):
-                                    if advisory.get("advisory_ghsa_id", "") == pending_alert.get("security_advisory", {}).get("ghsa_id", ""):
-                                        alerts.append(pending_alert)
-                                        break
+                                if alert.advisory.ghsa_id == pending_alert.advisory.ghsa_id:
+                                    alerts.append(pending_alert)
             except Exception as err:
                 Octokit.warning(f"Unable to get Dependabot alerts :: {err}")
 

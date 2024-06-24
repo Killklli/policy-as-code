@@ -26,8 +26,8 @@ class DependencyAlert(OctoItem):
     ecosystem: Optional[str] = None
     """Ecosystem"""
     
-    package: Optional[str] = None
-    """Package"""
+    name: Optional[str] = None
+    """Package Name"""
     
     manifest: Optional[str] = None
     """Manifest"""

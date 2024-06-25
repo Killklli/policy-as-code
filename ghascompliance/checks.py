@@ -480,7 +480,9 @@ class Checks:
             names.append(dependency.getPurl())
 
             #  none is set to just check if the name or pattern is discovered
+            print(dependency.fullname, dependency.getPurl())
             if self.policy.checkViolation("none", "dependencies", names=names, ids=ids):
+                print("checked violation")
                 dependency_violations.append([dependency.fullname])
                 if self.display:
                     Octokit.error(

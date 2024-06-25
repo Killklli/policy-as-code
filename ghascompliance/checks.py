@@ -404,6 +404,7 @@ class Checks:
         warnings.extend(dependencies.findNames(warnings_names))
 
         for warning in warnings:
+            print("Checking warning", warning.fullname, warning.license)
             if warning.name in ignores_names or warning.license in ignores_ids:
                 Octokit.debug(f"Skipping {warning} because in ignore list...")
                 continue
@@ -433,6 +434,7 @@ class Checks:
         violations.extend(dependencies.findNames(violations_names))
 
         for violation in violations:
+            print("Checking violation", violation.fullname, violation.license)
             if violation.name in ignores_names or violation.license in ignores_ids:
                 Octokit.debug(f"Skipping {violation} because in ignore list...")
                 continue
@@ -535,8 +537,7 @@ class Checks:
 
             #  none is set to just check if the name or pattern is discovered
             for alert in dependency.alerts:
-                if self.policy.checkViolation(alert.severity, "dependencies", names=names, ids=ids):
-                    
+                if self.policy.checkViolation(alert.severity, "dependencies", names=names, ids=ids):                    
                     dependency_violations.append([dependency.fullname])
                     if self.display:
                         Octokit.error(

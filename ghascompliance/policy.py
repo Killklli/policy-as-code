@@ -240,6 +240,8 @@ class Policy:
             raise Exception("`security` is set to None/Null")
 
         severity = severity.lower()
+        print("printing severity")
+        print(severity)
         severities = []
 
         if severity == "none":

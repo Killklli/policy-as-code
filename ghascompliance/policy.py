@@ -240,8 +240,6 @@ class Policy:
             raise Exception("`security` is set to None/Null")
 
         severity = severity.lower()
-        print("printing severity")
-        print(severity)
         severities = []
 
         if severity == "none":
@@ -327,6 +325,9 @@ class Policy:
 
         elif self.policy:
             print("AGAISNT POLICY?")
+            print(self.checkViolationAgainstPolicy(
+                severity, technology, names=names, ids=ids
+            ))
             return self.checkViolationAgainstPolicy(
                 severity, technology, names=names, ids=ids
             )
@@ -384,8 +385,6 @@ class Policy:
                 severities = self._buildSeverityList(level)
         else:
             severities = self.severities
-        print(level)
-        print(severities)
         if level == "all":
             severities = SEVERITIES
         elif level == "none":

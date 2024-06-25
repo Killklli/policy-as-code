@@ -324,15 +324,10 @@ class Policy:
                 return violation_remediation
 
         elif self.policy:
-            print("AGAISNT POLICY?")
-            print(self.checkViolationAgainstPolicy(
-                severity, technology, names=names, ids=ids
-            ))
             return self.checkViolationAgainstPolicy(
                 severity, technology, names=names, ids=ids
             )
         else:
-            print("Sev Check")
             if severity == "none":
                 return False
             elif severity == "all":
@@ -385,12 +380,12 @@ class Policy:
                 severities = self._buildSeverityList(level)
         else:
             severities = self.severities
+
         if level == "all":
             severities = SEVERITIES
         elif level == "none":
             severities = []
-        print(severity)
-        print(severities)
+
         return severity in severities
 
     def checkLicensingViolation(self, license: str, dependency: dict = {}):

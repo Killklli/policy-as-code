@@ -535,7 +535,7 @@ class Checks:
 
             #  none is set to just check if the name or pattern is discovered
             print(dependency.fullname, dependency.getPurl())
-            
+            print(self.policy.checkViolation("none", "dependencies", names=names, ids=ids))
             if self.policy.checkViolation("none", "dependencies", names=names, ids=ids):
                 print("checked violation")
                 

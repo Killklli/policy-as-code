@@ -382,7 +382,8 @@ class Policy:
                 severities = self._buildSeverityList(level)
         else:
             severities = self.severities
-
+        print(level)
+        print(severities)
         if level == "all":
             severities = SEVERITIES
         elif level == "none":

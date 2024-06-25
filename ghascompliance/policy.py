@@ -389,7 +389,8 @@ class Policy:
             severities = SEVERITIES
         elif level == "none":
             severities = []
-
+        print(severity)
+        print(severities)
         return severity in severities
 
     def checkLicensingViolation(self, license: str, dependency: dict = {}):
